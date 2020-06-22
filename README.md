@@ -1,16 +1,14 @@
 [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/pegedi/check-mailbox)
 
 # check-mailbox
-Setting up environment
+## Setting up environment
+That project will be deployed to github pages (project) using [Create React App deployment](https://create-react-app.dev/docs/deployment#github-pages):
 
-    cd CheckMailbox/
-    npm install
-    npm install -g firebase-tools
-    firebase --version
-    firebase login --no-localhost
-    firebase projects:list
-    firebase use --add
-    firebase emulators:start
+### Step 1
+Open your `package.json` and add a `homepage` field for your project:
+
+    "homepage": "https://myusername.github.io/my-app",
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
