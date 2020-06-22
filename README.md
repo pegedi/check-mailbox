@@ -2,7 +2,7 @@
 
 # check-mailbox
 ## Setting up environment
-That project will be deployed to github pages (project) using [Create React App deployment](https://create-react-app.dev/docs/deployment#github-pages):
+That project will be deployed to [project github pages](https://pegedi.github.io/check-mailbox/) using [Create React App deployment](https://create-react-app.dev/docs/deployment#github-pages):
 
 ### Step 1
 Open your `package.json` and add a `homepage` field for your project:
