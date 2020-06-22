@@ -8,8 +8,33 @@ That project will be deployed to github pages (project) using [Create React App 
 Open your `package.json` and add a `homepage` field for your project:
 
     "homepage": "https://myusername.github.io/my-app",
+### Step 2: Install `gh-pages` and add deploy to scripts in `package.json`
 
+To publish it at `https://myusername.github.io/my-app`, run:
 
+    npm install --save gh-pages
+Alternatively you may use yarn:
+
+    yarn add gh-pages
+Add the following scripts in your package.json:
+```
+"scripts": {
++   "predeploy": "npm run build",
++   "deploy": "gh-pages -d build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+```
+### Step 3: Deploy the site by running `npm run deploy`
+Then run:
+
+    npm run deploy
+
+### Step 4: For a project page, ensure your project’s settings use `gh-pages`
+Finally, make sure GitHub Pages option in your GitHub project settings is set to use the `gh-pages` branch:
+
+![alt text](https://i.imgur.com/HUjEr9l.png "setting gh-pages branch")
+
+## React
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
