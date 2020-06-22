@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/check-mailbox/static/css/main.5f361e03.chunk.css",
+    "main.js": "/check-mailbox/static/js/main.550917d6.chunk.js",
+    "main.js.map": "/check-mailbox/static/js/main.550917d6.chunk.js.map",
+    "runtime-main.js": "/check-mailbox/static/js/runtime-main.a2ab0052.js",
+    "runtime-main.js.map": "/check-mailbox/static/js/runtime-main.a2ab0052.js.map",
+    "static/js/2.5001a106.chunk.js": "/check-mailbox/static/js/2.5001a106.chunk.js",
+    "static/js/2.5001a106.chunk.js.map": "/check-mailbox/static/js/2.5001a106.chunk.js.map",
+    "index.html": "/check-mailbox/index.html",
+    "precache-manifest.336601cd5e736cea9147a2581e766729.js": "/check-mailbox/precache-manifest.336601cd5e736cea9147a2581e766729.js",
+    "service-worker.js": "/check-mailbox/service-worker.js",
+    "static/css/main.5f361e03.chunk.css.map": "/check-mailbox/static/css/main.5f361e03.chunk.css.map",
+    "static/js/2.5001a106.chunk.js.LICENSE.txt": "/check-mailbox/static/js/2.5001a106.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/check-mailbox/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a2ab0052.js",
+    "static/js/2.5001a106.chunk.js",
+    "static/css/main.5f361e03.chunk.css",
+    "static/js/main.550917d6.chunk.js"
+  ]
+}
