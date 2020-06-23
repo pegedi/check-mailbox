@@ -1,25 +1,23 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ButtonAppBar from'./AppBar';
+import Box from "@material-ui/core/Box";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import OriginalCRApp from './OriginalCRApp';
 
+const tableData = [ ['1 Tél', 'Hóvirág', 'Fehér'],
+                    ['2 Tavasz', 'Orgona', 'Lila'],
+                    ['3 Nyár', 'Napraforgó', 'Sárga'],
+                    ['4 Ősz', 'Őszirózsa', 'Piros']]
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+        <CssBaseline/>
+        <ButtonAppBar />
+        <OriginalCRApp />
+        
+    </>
   );
 }
 
