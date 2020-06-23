@@ -5,18 +5,23 @@ import ButtonAppBar from'./AppBar';
 import Box from "@material-ui/core/Box";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import OriginalCRApp from './OriginalCRApp';
+import CustomizedTables from './Table';
 
 const tableData = [ ['1 Tél', 'Hóvirág', 'Fehér'],
                     ['2 Tavasz', 'Orgona', 'Lila'],
                     ['3 Nyár', 'Napraforgó', 'Sárga'],
-                    ['4 Ősz', 'Őszirózsa', 'Piros']]
+                    ['4 Ősz', 'Őszirózsa', 'Piros']];
+const tableHeaders = ['Évszak', 'Virág', 'Szín'];
+
 function App() {
+  
   return (
     <>
         <CssBaseline/>
         <ButtonAppBar />
-        <OriginalCRApp />
-        
+        <Box m={15}>
+        <CustomizedTables />
+        </Box>
     </>
   );
 }
