@@ -14,13 +14,15 @@ const tableData = [ ['1 Tél', 'Hóvirág', 'Fehér'],
 const tableHeaders = ['Évszak', 'Virág', 'Szín'];
 
 function App() {
+  let appBarHeight = 0;
   
   return (
     <>
         <CssBaseline/>
-        
-        <Box m={15}>
-        <CustomizedTables />
+        <ButtonAppBar />
+
+        <Box m='20px' mt='80px'>
+           <CustomizedTables />
         </Box>
     </>
   );

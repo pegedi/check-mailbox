@@ -12,8 +12,6 @@ const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.info.main,
     color: theme.palette.common.white,
-   // position: 'sticky',
-    zIndex: '10',
   },
   body: {
     fontSize: 14,
@@ -40,38 +38,55 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   table: {
-    minWidth: 700,
+  //  minWidth: '700',
   },
-});
+  head: {
+    backgroundColor: theme.palette.info.main,
+    color: theme.palette.common.white,
+    position: 'sticky',
+    top: '64px',
+
+  //  marginTop: '10px',
+    zIndex: '10', 
+  },
+  root: {
+    width: '100%',
+ //   width: 'auto', 
+    display: 'table',
+    margin: '0px',
+ //   overflowX: 'auto',
+  },
+
+}));
 
 export default function CustomizedTables() {
   const classes = useStyles();
 
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="customized table" stickyHeader={true}>
-        <TableHead>
+    <TableContainer component={Paper} className={classes.root}>
+      <Table className={classes.table} aria-label="customized table" >
+        <TableHead >
           <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            <TableCell className={classes.head}>Dessert (100g serving)</TableCell>
+            <TableCell align="right" className={classes.head}>Calories</TableCell>
+            <TableCell align="right" className={classes.head}>Fat&nbsp;(g)</TableCell>
+            <TableCell align="right" className={classes.head}>Carbs&nbsp;(g)</TableCell>
+            <TableCell align="right" className={classes.head}>Protein&nbsp;(g)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row">
+            <TableRow key={row.name}>
+              <TableCell component="th" scope="row">
                 {row.name}
-              </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
-            </StyledTableRow>
+              </TableCell>
+              <TableCell align="right">{row.calories}</TableCell>
+              <TableCell align="right">{row.fat}</TableCell>
+              <TableCell align="right">{row.carbs}</TableCell>
+              <TableCell align="right">{row.protein}</TableCell>
+            </TableRow>
           ))}
         </TableBody>
       </Table>
