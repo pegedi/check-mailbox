@@ -12,7 +12,7 @@ const StyledTableCell = withStyles((theme) => ({
   head: {
     backgroundColor: theme.palette.info.main,
     color: theme.palette.common.white,
-    position: 'sticky',
+   // position: 'sticky',
     zIndex: '10',
   },
   body: {
@@ -51,7 +51,7 @@ export default function CustomizedTables() {
 
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="customized table">
+      <Table className={classes.table} aria-label="customized table" stickyHeader={true}>
         <TableHead>
           <TableRow>
             <StyledTableCell>Dessert (100g serving)</StyledTableCell>
