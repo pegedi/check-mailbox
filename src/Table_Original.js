@@ -37,11 +37,7 @@ const rows = [
   createData('Cupcake', 305, 3.7, 67, 4.3),
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
-const headerCells = [{fieldName: "Dessert (100g serving)", align: "left"},
-                {fieldName: "Calories", align: "right"},
-                {fieldName: "Fat", align: "right"},
-                {fieldName: "Carbs", align: "right"},
-                {fieldName: "Protein", align: "right"},]
+
 const useStyles = makeStyles(theme => ({
   table: {
   //  minWidth: '700',
@@ -73,9 +69,11 @@ export default function CustomizedTables() {
       <Table className={classes.table} aria-label="customized table" >
         <TableHead >
           <TableRow>
-            {headerCells.map(item => (<TableCell className={classes.head} align={item.align}>
-                {item.fieldName} </TableCell>))}
-            
+            <TableCell className={classes.head}>Dessert (100g serving)</TableCell>
+            <TableCell align="right" className={classes.head}>Calories</TableCell>
+            <TableCell align="right" className={classes.head}>Fat&nbsp;(g)</TableCell>
+            <TableCell align="right" className={classes.head}>Carbs&nbsp;(g)</TableCell>
+            <TableCell align="right" className={classes.head}>Protein&nbsp;(g)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

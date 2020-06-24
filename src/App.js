@@ -13,6 +13,12 @@ const tableData = [ ['1 Tél', 'Hóvirág', 'Fehér'],
                     ['4 Ősz', 'Őszirózsa', 'Piros']];
 const tableHeaders = ['Évszak', 'Virág', 'Szín'];
 
+const headerCells = [{fieldName: "Dessert (100g serving)", align: "left"},
+                {fieldName: "Calories", align: "right"},
+                {fieldName: "Fat", align: "right"},
+                {fieldName: "Carbs", align: "right"},
+                {fieldName: "Protein", align: "right"},]
+
 function App() {
   let appBarHeight = 0;
   
@@ -22,7 +28,7 @@ function App() {
         <ButtonAppBar />
 
         <Box m='20px' mt='80px'>
-           <CustomizedTables />
+           <CustomizedTables headerCells={headerCells} />
         </Box>
     </>
   );
