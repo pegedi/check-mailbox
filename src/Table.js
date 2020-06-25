@@ -72,22 +72,23 @@ export default function CustomizedTables() {
     <TableContainer component={Paper} className={classes.root}>
       <Table className={classes.table} aria-label="customized table" >
         <TableHead >
-          <TableRow>
-            {headerCells.map(item => (<TableCell className={classes.head} align={item.align}>
+          <TableRow key="-1">
+            {headerCells.map((item, itemIndex) => (<TableCell key={"header/" + itemIndex} 
+                className={classes.head} align={item.align}>
                 {item.fieldName} </TableCell>))}
             
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rows.map((row, rowIndex) => (
             <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
+              <TableCell key={rowIndex+"/1"} component="th" scope="row">
                 {row.name}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              <TableCell key={rowIndex+"/2"}  align="right">{row.calories}</TableCell>
+              <TableCell key={rowIndex+"/3"} align="right">{row.fat}</TableCell>
+              <TableCell key={rowIndex+"/4"} align="right">{row.carbs}</TableCell>
+              <TableCell key={rowIndex+"/5"} align="right">{row.protein}</TableCell>
             </TableRow>
           ))}
         </TableBody>
