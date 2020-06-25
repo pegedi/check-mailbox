@@ -6,6 +6,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import CustomizedTables from './Table';
 import jsonp from './jsonp';
 import downloadfile2 from './downloadToFile';
+import StatusBar from './StatusBar';
 
 const queryURL='https://script.google.com/macros/s/AKfycbzNEIVgweOKPUyS9rjAOePMG2fTcKy1YIj0V8cI_VpMTGQLuA3-/exec?query=label:orareport';
 const queryDEVURL='https://script.google.com/macros/s/AKfycbymuFfnEq2Rw-KSq93_3u4qpKnFiOhQMn-uY2_3IdMo/dev?query=label:orareport';
@@ -52,6 +53,7 @@ function App() {
                 headerCells={headerCells} 
                 dataRows={dataRows}/>
         </Box>
+        <StatusBar />
     </>
   );
 }
