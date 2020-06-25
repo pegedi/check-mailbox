@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -8,40 +8,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: theme.palette.info.main,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
-    },
-  },
-}))(TableRow);
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-const headerCells = [{fieldName: "Dessert (100g serving)", align: "left"},
-                {fieldName: "Calories", align: "right"},
-                {fieldName: "Fat", align: "right"},
-                {fieldName: "Carbs", align: "right"},
-                {fieldName: "Protein", align: "right"},]
 const useStyles = makeStyles(theme => ({
   table: {
   //  minWidth: '700',
@@ -65,7 +31,7 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-export default function CustomizedTables() {
+export default function CustomizedTables({headerCells, dataRows}) {
   const classes = useStyles();
 
   return (
@@ -80,15 +46,15 @@ export default function CustomizedTables() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, rowIndex) => (
-            <TableRow key={row.name}>
+          {dataRows.map((row, rowIndex) => (
+            <TableRow key={"ROW/" + rowIndex}>
               <TableCell key={rowIndex+"/1"} component="th" scope="row">
-                {row.name}
+                {row.reportName}
               </TableCell>
-              <TableCell key={rowIndex+"/2"}  align="right">{row.calories}</TableCell>
-              <TableCell key={rowIndex+"/3"} align="right">{row.fat}</TableCell>
-              <TableCell key={rowIndex+"/4"} align="right">{row.carbs}</TableCell>
-              <TableCell key={rowIndex+"/5"} align="right">{row.protein}</TableCell>
+              <TableCell key={rowIndex+"/2"}  align="left">{row.subject}</TableCell>
+              <TableCell key={rowIndex+"/3"} align="left">{row.requestID}</TableCell>
+              <TableCell key={rowIndex+"/4"} align="left">{row.linkString}</TableCell>
+              <TableCell key={rowIndex+"/5"} align="left">{row.requestID}</TableCell>
             </TableRow>
           ))}
         </TableBody>
