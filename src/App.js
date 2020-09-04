@@ -4,12 +4,19 @@ import ButtonAppBar from'./AppBar';
 import Box from "@material-ui/core/Box";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import CustomizedTables from './Table';
-import jsonp from './jsonp';
+//import jsonp from './jsonp';
 import downloadfile2 from './downloadToFile';
 import StatusBar from './StatusBar';
 
+
 const queryURL='https://script.google.com/macros/s/AKfycbzNEIVgweOKPUyS9rjAOePMG2fTcKy1YIj0V8cI_VpMTGQLuA3-/exec?query=label:orareport';
 const queryDEVURL='https://script.google.com/macros/s/AKfycbymuFfnEq2Rw-KSq93_3u4qpKnFiOhQMn-uY2_3IdMo/dev?query=label:orareport';
+const API_KEY = '<MY API KEY';
+
+const CLIENT_ID = '<MY CLIENT ID>'; 
+const DISCOVERY_DOCS = ["https://script.googleapis.com/$discovery/rest?version=v1"];
+var SCOPES = 'https://www.googleapis.com/auth/script.projects';
+
 
 const headerCells = [{fieldName: "Report Name", align: "left"},
                 {fieldName: "Subject", align: "left"},
@@ -18,10 +25,40 @@ const headerCells = [{fieldName: "Report Name", align: "left"},
                 {fieldName: "ThreadID", align: "left"},]
 
 function App() {
+
+   if (!document.getElementById('gapi_script')) {
+        let script = document.createElement('script');
+        script.src = 'https://apis.google.com/js/client.js'
+        script.setAttribute("id", "gapi_script")
+        script.setAttribute("async", "");
+        script.setAttribute("defer","");
+        script.onload = function() {
+            window.gapi.load('client:auth2', initClient);
+        }
+     //   script.setAttribute("onload", 'this.onload=function(){};handleClientLoad()');
+     //   script.setAttribute("onreadystatechange","if (this.readyState === 'complete') this.onload()");
+        document.body.appendChild(script);
+   }
+   
+     function initClient() {
+        window.gapi.client.init({
+          apiKey: API_KEY,
+          clientId: CLIENT_ID,
+          discoveryDocs: DISCOVERY_DOCS,
+          scope: SCOPES
+        }).then(function () {
+            console.log("gapi.client.init went OK");
+        }, function(error) {
+            console.log('gapi.client.init went wrong:');
+            console.log(error);
+        });
+      }
+      
+
   const inquiryPressed = (event) => {
     console.log('Refresh Started!');
 
-    jsonp(queryDEVURL, response => {setDataRows(response)});
+//    jsonp(queryDEVURL, response => {setDataRows(response)});
  
   };
   
