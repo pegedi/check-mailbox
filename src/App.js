@@ -11,9 +11,9 @@ import StatusBar from './StatusBar';
 
 const queryURL='https://script.google.com/macros/s/AKfycbzNEIVgweOKPUyS9rjAOePMG2fTcKy1YIj0V8cI_VpMTGQLuA3-/exec?query=label:orareport';
 const queryDEVURL='https://script.google.com/macros/s/AKfycbymuFfnEq2Rw-KSq93_3u4qpKnFiOhQMn-uY2_3IdMo/dev?query=label:orareport';
-const API_KEY = '<MY API KEY';
+const API_KEY = '<my api key>';
 
-const CLIENT_ID = '<MY CLIENT ID>'; 
+const CLIENT_ID = '<my client id>'; 
 const DISCOVERY_DOCS = ["https://script.googleapis.com/$discovery/rest?version=v1"];
 var SCOPES = 'https://www.googleapis.com/auth/script.projects';
 
@@ -40,6 +40,11 @@ function App() {
         document.body.appendChild(script);
    }
    
+   //const [dataRows, setDataRows] = useState([]);
+   let dataRows = [];
+   const [appUName, setAppUName] = useState('Egy');
+  // setAppUserName('Kettő');
+
      function initClient() {
         window.gapi.client.init({
           apiKey: API_KEY,
@@ -48,16 +53,43 @@ function App() {
           scope: SCOPES
         }).then(function () {
             console.log("gapi.client.init went OK");
+            window.gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+            // Handle the initial sign-in state.
+            updateSigninStatus(window.gapi.auth2.getAuthInstance().isSignedIn.get());
+
         }, function(error) {
             console.log('gapi.client.init went wrong:');
             console.log(error);
         });
       }
-      
+   
 
-  const inquiryPressed = (event) => {
+   const updateSigninStatus = (isSignedIn) => {
+       console.log('function updateSigninStatus:');
+       console.log(isSignedIn);
+       if (isSignedIn) {
+          const currentProfile = window.gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile();
+          console.log(currentProfile.getName());
+          const uName = currentProfile.getName();
+          setAppUName('Keet');
+          console.log(appUName);
+        } else {
+          setAppUName('Haarom');
+        }
+   }
+
+   const loginClickedFunction = (event) => {
+      console.log(window.gapi.auth2.getAuthInstance().isSignedIn.get())
+      if (window.gapi.auth2.getAuthInstance().isSignedIn.get()) {
+        window.gapi.auth2.getAuthInstance().signOut();
+      } else {
+        window.gapi.auth2.getAuthInstance().signIn();
+
+      }
+   };
+   const inquiryPressed = (event) => {
     console.log('Refresh Started!');
-
+    setAppUName('Refresh!');
 //    jsonp(queryDEVURL, response => {setDataRows(response)});
  
   };
@@ -74,7 +106,6 @@ function App() {
 
     event.stopPropagation();
     }
-  const [dataRows, setDataRows] = useState([]);
 
   
   return (
@@ -83,6 +114,8 @@ function App() {
         <ButtonAppBar 
             inquiryPressed={inquiryPressed}
             downloadBtnClicked={downloadBtnClicked}
+            loginClicked={loginClickedFunction}
+            userName={appUName}
         />
 
         <Box m='20px' mt='80px'>
@@ -90,6 +123,7 @@ function App() {
                 headerCells={headerCells} 
                 dataRows={dataRows}/>
         </Box>
+        <p>user name: {appUName}</p>
         <StatusBar />
     </>
   );

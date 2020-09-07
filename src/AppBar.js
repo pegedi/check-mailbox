@@ -25,9 +25,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ButtonAppBar({inquiryPressed, downloadBtnClicked}) {
+export default function ButtonAppBar({inquiryPressed, downloadBtnClicked, loginClicked, userName}) {
   const classes = useStyles();
-
+  const loginBtnText = userName ? userName : "Login";
+  console.log('function ButtonAppBar: ');
+  console.log(userName);
   return (
     <div className={classes.root}>
       <AppBar position="fixed">
@@ -47,6 +49,14 @@ export default function ButtonAppBar({inquiryPressed, downloadBtnClicked}) {
               aria-label="info" >
             <InfoOutlinedIcon />
           </IconButton>
+          <Button 
+            variant="contained"
+            color="primary"
+            className={classes.button}
+            onClick={loginClicked}
+          >
+            {loginBtnText}
+          </Button>
 
           <Typography variant="h6" className={classes.title}>
             Oracle Reports
