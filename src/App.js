@@ -25,6 +25,7 @@ const headerCells = [{fieldName: "Report Name", align: "left"},
                 {fieldName: "ThreadID", align: "left"},]
 
 function App() {
+   console.log('function app Started');
 
    if (!document.getElementById('gapi_script')) {
         let script = document.createElement('script');
@@ -34,14 +35,18 @@ function App() {
         script.setAttribute("defer","");
         script.onload = function() {
             window.gapi.load('client:auth2', initClient);
-        }
+        } 
+        
      //   script.setAttribute("onload", 'this.onload=function(){};handleClientLoad()');
      //   script.setAttribute("onreadystatechange","if (this.readyState === 'complete') this.onload()");
         document.body.appendChild(script);
+       // initClient();
+
    }
    
    //const [dataRows, setDataRows] = useState([]);
    let dataRows = [];
+   let uName = null;
    const [appUName, setAppUName] = useState('Egy');
   // setAppUserName('Kettő');
 
@@ -70,12 +75,13 @@ function App() {
        if (isSignedIn) {
           const currentProfile = window.gapi.auth2.getAuthInstance().currentUser.get().getBasicProfile();
           console.log(currentProfile.getName());
-          const uName = currentProfile.getName();
-          setAppUName('Keet');
-          console.log(appUName);
+          uName = currentProfile.getName();       
         } else {
-          setAppUName('Haarom');
+          uName = null;
         }
+        setAppUName(uName);
+        console.log(appUName);
+
    }
 
    const loginClickedFunction = (event) => {
@@ -86,10 +92,13 @@ function App() {
         window.gapi.auth2.getAuthInstance().signIn();
 
       }
+      event.stopPropagation();
    };
+
    const inquiryPressed = (event) => {
     console.log('Refresh Started!');
-    setAppUName('Refresh!');
+    setAppUName('-ha');
+    console.log(appUName);
 //    jsonp(queryDEVURL, response => {setDataRows(response)});
  
   };
@@ -115,7 +124,7 @@ function App() {
             inquiryPressed={inquiryPressed}
             downloadBtnClicked={downloadBtnClicked}
             loginClicked={loginClickedFunction}
-            userName={appUName}
+            userName={'Hello'}
         />
 
         <Box m='20px' mt='80px'>
@@ -123,7 +132,7 @@ function App() {
                 headerCells={headerCells} 
                 dataRows={dataRows}/>
         </Box>
-        <p>user name: {appUName}</p>
+        <p>user name: {'haha'}</p>
         <StatusBar />
     </>
   );

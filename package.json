@@ -36,5 +36,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://pegedi.github.io/check-mailbox"
+  "homepage": "https://pegedi.github.io/check-mailbox",
+  "devDependencies": {
+    "eslint-plugin-react-hooks": "^4.1.0"
+  }
 }
