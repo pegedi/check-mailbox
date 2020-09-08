@@ -11,9 +11,9 @@ import StatusBar from './StatusBar';
 
 const queryURL='https://script.google.com/macros/s/AKfycbzNEIVgweOKPUyS9rjAOePMG2fTcKy1YIj0V8cI_VpMTGQLuA3-/exec?query=label:orareport';
 const queryDEVURL='https://script.google.com/macros/s/AKfycbymuFfnEq2Rw-KSq93_3u4qpKnFiOhQMn-uY2_3IdMo/dev?query=label:orareport';
-const API_KEY = '<myAPi KEY>';
+const API_KEY = '<my api key>';
 
-const CLIENT_ID = '<my Client ID>'; 
+const CLIENT_ID = '<my client id>'; 
 const DISCOVERY_DOCS = ["https://script.googleapis.com/$discovery/rest?version=v1"];
 var SCOPES = 'https://www.googleapis.com/auth/script.projects';
 
