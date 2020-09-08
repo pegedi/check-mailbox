@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import ButtonAppBar from'./AppBar';
 import Box from "@material-ui/core/Box";
@@ -11,9 +11,9 @@ import StatusBar from './StatusBar';
 
 const queryURL='https://script.google.com/macros/s/AKfycbzNEIVgweOKPUyS9rjAOePMG2fTcKy1YIj0V8cI_VpMTGQLuA3-/exec?query=label:orareport';
 const queryDEVURL='https://script.google.com/macros/s/AKfycbymuFfnEq2Rw-KSq93_3u4qpKnFiOhQMn-uY2_3IdMo/dev?query=label:orareport';
-const API_KEY = '<my api key>';
+const API_KEY = '<myAPi KEY>';
 
-const CLIENT_ID = '<my client id>'; 
+const CLIENT_ID = '<my Client ID>'; 
 const DISCOVERY_DOCS = ["https://script.googleapis.com/$discovery/rest?version=v1"];
 var SCOPES = 'https://www.googleapis.com/auth/script.projects';
 
@@ -24,8 +24,21 @@ const headerCells = [{fieldName: "Report Name", align: "left"},
                 {fieldName: "Link", align: "left"},
                 {fieldName: "ThreadID", align: "left"},]
 
-function App() {
+let uName = 'InitName';  
+export const AppProvider = (props) => {
+    const [appUName, setAppUName] = useState(uName);
+    console.log(appUName);
+    return (
+        
+           <App 
+             appUName={appUName}
+             setAppUName={setAppUName}
+           />
+    )
+}
+function App({appUName, setAppUName}) {
    console.log('function app Started');
+   console.log(typeof appUName);
 
    if (!document.getElementById('gapi_script')) {
         let script = document.createElement('script');
@@ -46,8 +59,8 @@ function App() {
    
    //const [dataRows, setDataRows] = useState([]);
    let dataRows = [];
-   let uName = null;
-   const [appUName, setAppUName] = useState('Egy');
+   
+ 
   // setAppUserName('Kettő');
 
      function initClient() {
@@ -59,6 +72,7 @@ function App() {
         }).then(function () {
             console.log("gapi.client.init went OK");
             window.gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+            
             // Handle the initial sign-in state.
             updateSigninStatus(window.gapi.auth2.getAuthInstance().isSignedIn.get());
 
@@ -68,7 +82,7 @@ function App() {
         });
       }
    
-
+   
    const updateSigninStatus = (isSignedIn) => {
        console.log('function updateSigninStatus:');
        console.log(isSignedIn);
@@ -80,7 +94,7 @@ function App() {
           uName = null;
         }
         setAppUName(uName);
-        console.log(appUName);
+        console.log(uName);
 
    }
 
@@ -124,7 +138,7 @@ function App() {
             inquiryPressed={inquiryPressed}
             downloadBtnClicked={downloadBtnClicked}
             loginClicked={loginClickedFunction}
-            userName={'Hello'}
+            userName={appUName}
         />
 
         <Box m='20px' mt='80px'>
@@ -132,10 +146,12 @@ function App() {
                 headerCells={headerCells} 
                 dataRows={dataRows}/>
         </Box>
-        <p>user name: {'haha'}</p>
-        <StatusBar />
+        <StatusBar
+            message1={'Username: ' + appUName} 
+        />
     </>
   );
 }
 
 export default App;
+
