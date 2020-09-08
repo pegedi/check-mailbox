@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ButtonAppBar({inquiryPressed, downloadBtnClicked, loginClicked, userName}) {
   const classes = useStyles();
-  const loginBtnText = userName ? userName : "Login";
+  const loginBtnText = userName ? 'Logout' : 'Login';
   console.log('function ButtonAppBar: ');
   console.log(userName);
   return (

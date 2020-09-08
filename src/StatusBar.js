@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
  
 }));
 
-export default function StatusBar() {
+export default function StatusBar(props) {
   const classes = useStyles();
 
   return (
@@ -29,7 +29,7 @@ export default function StatusBar() {
 
         <Toolbar className={classes.toolBar} >
             <Typography variant="body2" >
-              Ennek lent kellene lennie
+              {props.message1}
             </Typography>
         </Toolbar>
       </AppBar>
