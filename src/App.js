@@ -7,13 +7,13 @@ import CustomizedTables from './Table';
 //import jsonp from './jsonp';
 import downloadfile2 from './downloadToFile';
 import StatusBar from './StatusBar';
-import {API_KEY, CLIENT_ID} from './.env.local'
+//import {API_KEY_ENV, CLIENT_ID_ENV} from './.env.local'
 
 const queryURL='https://script.google.com/macros/s/AKfycbzNEIVgweOKPUyS9rjAOePMG2fTcKy1YIj0V8cI_VpMTGQLuA3-/exec?query=label:orareport';
 const queryDEVURL='https://script.google.com/macros/s/AKfycbymuFfnEq2Rw-KSq93_3u4qpKnFiOhQMn-uY2_3IdMo/dev?query=label:orareport';
-//const API_KEY = '<MY API KEY>';
+const API_KEY = process.env.REACT_APP_API_KEY;
 
-//const CLIENT_ID = '<MY CLIENT ID>'; 
+const CLIENT_ID = process.env.REACT_APP_CLIENT_ID; 
 const DISCOVERY_DOCS = ["https://script.googleapis.com/$discovery/rest?version=v1"];
 var SCOPES = 'https://www.googleapis.com/auth/script.projects';
 
@@ -38,7 +38,8 @@ export const AppProvider = (props) => {
 }
 function App({appUName, setAppUName}) {
    console.log('function app Started');
-   console.log(typeof appUName);
+   console.log(process.env.REACT_APP_API_KEY); 
+   console.log(process.env.REACT_APP_CLIENT_ID);
 
    if (!document.getElementById('gapi_script')) {
         let script = document.createElement('script');
