@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/check-mailbox/static/css/main.5f361e03.chunk.css",
-    "main.js": "/check-mailbox/static/js/main.76c3b1ee.chunk.js",
-    "main.js.map": "/check-mailbox/static/js/main.76c3b1ee.chunk.js.map",
+    "main.js": "/check-mailbox/static/js/main.2d8d4d48.chunk.js",
+    "main.js.map": "/check-mailbox/static/js/main.2d8d4d48.chunk.js.map",
     "runtime-main.js": "/check-mailbox/static/js/runtime-main.d212e8fe.js",
     "runtime-main.js.map": "/check-mailbox/static/js/runtime-main.d212e8fe.js.map",
-    "static/js/2.203dd05c.chunk.js": "/check-mailbox/static/js/2.203dd05c.chunk.js",
-    "static/js/2.203dd05c.chunk.js.map": "/check-mailbox/static/js/2.203dd05c.chunk.js.map",
+    "static/js/2.3df50056.chunk.js": "/check-mailbox/static/js/2.3df50056.chunk.js",
+    "static/js/2.3df50056.chunk.js.map": "/check-mailbox/static/js/2.3df50056.chunk.js.map",
     "index.html": "/check-mailbox/index.html",
-    "precache-manifest.d434115b3b33de7e7351336040fe057d.js": "/check-mailbox/precache-manifest.d434115b3b33de7e7351336040fe057d.js",
+    "precache-manifest.b94baac7777693564e4fd2a24abe6916.js": "/check-mailbox/precache-manifest.b94baac7777693564e4fd2a24abe6916.js",
     "service-worker.js": "/check-mailbox/service-worker.js",
     "static/css/main.5f361e03.chunk.css.map": "/check-mailbox/static/css/main.5f361e03.chunk.css.map",
-    "static/js/2.203dd05c.chunk.js.LICENSE.txt": "/check-mailbox/static/js/2.203dd05c.chunk.js.LICENSE.txt"
+    "static/js/2.3df50056.chunk.js.LICENSE.txt": "/check-mailbox/static/js/2.3df50056.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.d212e8fe.js",
-    "static/js/2.203dd05c.chunk.js",
+    "static/js/2.3df50056.chunk.js",
     "static/css/main.5f361e03.chunk.css",
-    "static/js/main.76c3b1ee.chunk.js"
+    "static/js/main.2d8d4d48.chunk.js"
   ]
 }
