@@ -7,6 +7,8 @@ import CustomizedTables from './Table';
 //import jsonp from './jsonp';
 import downloadfile2 from './downloadToFile';
 import StatusBar from './StatusBar';
+import { CircularProgress } from '@material-ui/core';
+import zIndex from '@material-ui/core/styles/zIndex';
 
 const queryURL='https://script.google.com/macros/s/AKfycbzNEIVgweOKPUyS9rjAOePMG2fTcKy1YIj0V8cI_VpMTGQLuA3-/exec?query=label:orareport';
 const queryDEVURL='https://script.google.com/macros/s/AKfycbymuFfnEq2Rw-KSq93_3u4qpKnFiOhQMn-uY2_3IdMo/dev?query=label:orareport';
@@ -14,7 +16,7 @@ const API_KEY = process.env.REACT_APP_API_KEY;
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID; 
 const DISCOVERY_DOCS = ["https://script.googleapis.com/$discovery/rest?version=v1"];
-var SCOPES = 'https://www.googleapis.com/auth/script.projects https://www.googleapis.com/auth/drive';
+var SCOPES = 'https://www.googleapis.com/auth/script.projects https://www.googleapis.com/auth/drive https://mail.google.com/';
 
 
 const headerCells = [{fieldName: "Report Name", align: "left"},
@@ -37,8 +39,6 @@ export const AppProvider = (props) => {
 }
 function App({appUName, setAppUName}) {
    console.log('function app Started');
-   console.log(process.env.REACT_APP_API_KEY); 
-   console.log(process.env.REACT_APP_CLIENT_ID);
 
    if (!document.getElementById('gapi_script')) {
         let script = document.createElement('script');
@@ -57,12 +57,12 @@ function App({appUName, setAppUName}) {
 
    }
    
-   //const [dataRows, setDataRows] = useState([]);
-   let dataRows = [];
+   const [dataRows, setDataRows] = useState([]);
+   const [isInProgress, setProgress] = useState(false);
+   const [statusMessage, setStatusMessage] = useState(null);
+   //let dataRows = [];
    
  
-  // setAppUserName('Kettő');
-
      function initClient() {
         window.gapi.client.init({
           apiKey: API_KEY,
@@ -140,10 +140,48 @@ function App({appUName, setAppUName}) {
         });
       }
 
+      function callLabelChange(){
+            const scriptId = '1_LCQKiOadsTyDbwJIGwN0jwyS9xJ3z-wDq_Pgk2P-wtpbJGX1EObhntl';
+            window.gapi.client.script.scripts.run({
+              'scriptId': scriptId,
+              'resource': {
+                  'function': 'emailLabelChange',
+                  'parameters': [dataRows.map(x => x.threadID)],
+                  "devMode": true
+              }
+            }).then(function(resp){
+                let result=resp.result;
+                if (result.error && result.error.status) {
+                    // The API encountered a problem before the script started executing.
+                    console.log('Error calling API:');
+                    console.log(result);
+                } else if (result.error) {
+                    // The API executed, but the script returned an error.
+
+                    // Extract the first (and only) set of error details.
+                    // The values of this object are the script's 'errorMessage' and
+                    // 'errorType', and an array of stack trace elements.
+                    let error = result.error.details[0];
+                    console.log(result.error);
+                    console.log('Script error message: ' + error.errorMessage);
+                    if (error.scriptStackTraceElements) {
+                        console.log('Script error stacktrace:')
+                        for (const element of error.scriptStackTraceElements) {
+                            console.log(element);
+                        }
+                    }
+                } else {
+                    // The structure of the result will depend upon what the Apps
+                    console.log(resp.result.response.result);
+                    setStatusMessage('Text File downloaded - ' + resp.result.response.result);
+                    setDataRows([]);
+                }
+                setProgress(false);
+            });  
+      }//function callLabelChange
+
    function callScriptFunction0() {
        const scriptId = '1_LCQKiOadsTyDbwJIGwN0jwyS9xJ3z-wDq_Pgk2P-wtpbJGX1EObhntl';
-       console.log(window.gapi);
-       let auth = window.gapi.auth2.getAuthInstance();
        // Call the Apps Script API run method
        //   'scriptId' is the URL parameter that states what script to run
        //   'resource' describes the run request body (with the function name
@@ -152,43 +190,49 @@ function App({appUName, setAppUName}) {
        window.gapi.client.script.scripts.run({
            'scriptId': scriptId,
            'resource': {
-               'function': 'firstAPIFunction',
-               "devMode": true
+  //             'function': 'firstAPIFunction',
+//            'function': 'secondAPIfunction',
+//            'parameters': ['my parameter text'],
+                'function': 'lookupEmails',
+                'parameters': ['label:orareport'],
+                "devMode": true
             }
        }).then(function(resp){
            let result=resp.result;
            if (result.error && result.error.status) {
-               // The API encountered a problem before the script started executing.
-               console.log('Error calling API:');
-               console.log(result);
-           } else if (result.error) {
-               // The API executed, but the script returned an error.
+                // The API encountered a problem before the script started executing.
+                console.log('Error calling API:');
+                console.log(result);
+            } else if (result.error) {
+                // The API executed, but the script returned an error.
 
-               // Extract the first (and only) set of error details.
-               // The values of this object are the script's 'errorMessage' and
-               // 'errorType', and an array of stack trace elements.
-               let error = result.error.details[0];
-               console.log(result.error);
-               console.log('Script error message: ' + error.errorMessage);
+                // Extract the first (and only) set of error details.
+                // The values of this object are the script's 'errorMessage' and
+                // 'errorType', and an array of stack trace elements.
+                let error = result.error.details[0];
+                console.log(result.error);
+                console.log('Script error message: ' + error.errorMessage);
 
-               if (error.scriptStackTraceElements) {
-                   console.log('Script error stacktrace:')
-                   for (const element of error.scriptStackTraceElements) {
+                if (error.scriptStackTraceElements) {
+                    console.log('Script error stacktrace:')
+                    for (const element of error.scriptStackTraceElements) {
                        console.log(element);
-                   }
-               }
-           } else {
-               // The structure of the result will depend upon what the Apps
-               console.log(resp);
-           }
+                    }
+                }
+            } else {
+                // The structure of the result will depend upon what the Apps
+                console.log(resp.result.response.result);
+                setDataRows(resp.result.response.result);
+                setStatusMessage('Download is Ready - ' + resp.result.response.result.length + ' report(s) found');
+            }
+           setProgress(false);
        })
 
    }
    const inquiryPressed = (event) => {
     console.log('Refresh Started!');
-    setAppUName('-ha');
-    console.log(appUName);
-//    callAppsScript();
+    setStatusMessage('Download in progress');
+    setProgress(true);
     callScriptFunction0();
 //    jsonp(queryDEVURL, response => {setDataRows(response)});
  
@@ -196,13 +240,16 @@ function App({appUName, setAppUName}) {
   
   const downloadBtnClicked = (event) => {
     console.log("buttonClicked function started");
+    setStatusMessage('Textfile download in progress');
+    setProgress(true);
+    callLabelChange();
     let fileText = "Request ID|Subject|Report Name|Link\r\n";
     for (let dataRow of dataRows) {
     fileText += dataRow.requestID + "|" + dataRow.subject + "|" + dataRow.reportName + "|" + dataRow.linkString +"\r\n";          
     }
 
     downloadfile2("emailDetails.txt",fileText);
-//    $('#progress').html("File Downloaded");
+    
 
     event.stopPropagation();
     }
@@ -216,15 +263,24 @@ function App({appUName, setAppUName}) {
             downloadBtnClicked={downloadBtnClicked}
             loginClicked={loginClickedFunction}
             userName={appUName}
+            isInProgress={isInProgress}
         />
+        {isInProgress?
+        <div style={{position: 'fixed', left: '50%', top: '50%', zIndex: 100, display: 'block' }}>
+                <CircularProgress />
+            </div>:<></>
+        }
 
         <Box m='20px' mt='80px'>
+            
+            
            <CustomizedTables 
                 headerCells={headerCells} 
                 dataRows={dataRows}/>
         </Box>
         <StatusBar
             message1={'Username: ' + appUName} 
+            message2={statusMessage}
         />
     </>
   );

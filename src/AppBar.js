@@ -25,7 +25,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ButtonAppBar({inquiryPressed, downloadBtnClicked, loginClicked, userName}) {
+export default function ButtonAppBar({inquiryPressed, downloadBtnClicked, loginClicked, 
+                                      userName, isInProgress}) {
   const classes = useStyles();
   const loginBtnText = userName ? 'Logout' : 'Login';
   console.log('function ButtonAppBar: ');
@@ -39,14 +40,16 @@ export default function ButtonAppBar({inquiryPressed, downloadBtnClicked, loginC
               className={classes.menuButton} 
               color="inherit" 
               aria-label="refresh"
-              onClick={inquiryPressed} >
+              onClick={inquiryPressed}
+              disabled={isInProgress} >
             <RefreshIcon />
           </IconButton>
           <IconButton 
               edge="start" 
               className={classes.menuButton} 
               color="inherit" 
-              aria-label="info" >
+              aria-label="info"
+              disabled={isInProgress} >
             <InfoOutlinedIcon />
           </IconButton>
           <Button 
@@ -54,6 +57,7 @@ export default function ButtonAppBar({inquiryPressed, downloadBtnClicked, loginC
             color="primary"
             className={classes.button}
             onClick={loginClicked}
+            disabled={isInProgress}
           >
             {loginBtnText}
           </Button>
@@ -67,6 +71,7 @@ export default function ButtonAppBar({inquiryPressed, downloadBtnClicked, loginC
             className={classes.button}
             startIcon={<CloudDownloadOutlinedIcon />}
             onClick={downloadBtnClicked}
+            disabled={isInProgress}
           >
             
             Download
